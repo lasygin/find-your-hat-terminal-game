@@ -19,32 +19,26 @@ class Field {
     console.log(this.field.map(e => e.join('')).join('\n'));
   }
 
+
   static generateField(height, width, holePercent) {
     const randomField = [];
     const holeAmount = Math.floor((height * width) / 100 * holePercent);
-
-    // Initial user position
-    randomField.push([pathCharacter]);
-
+    
     // Generate plain field
     for (let i = 0; i < height; i++) {
-      if(!randomField[i]) {
-        randomField.push([]);
-      }
+      randomField.push([]);
       for (let j = 0; j < width; j++) {
-        if(randomField[i][j] !== pathCharacter) {
-          randomField[i].push(fieldCharacter);
-        }
+        randomField[i].push(fieldCharacter);
       }
     }
-
+    
     // Add holes
     for (let h = 0; h < holeAmount; h++) {
       let holeDone = false;
       
       while (!holeDone) {
-        const randomY = Math.floor(Math.random() * height)
-        const randomX = Math.floor(Math.random() * width)
+        const randomY = Math.floor(Math.random() * height);
+        const randomX = Math.floor(Math.random() * width);
 
         if (randomField[randomY][randomX] === fieldCharacter) {
           randomField[randomY][randomX] = hole;
@@ -57,8 +51,8 @@ class Field {
     let hatDone = false;
       
     while (!hatDone) {
-      const randomY = Math.floor(Math.random() * height)
-      const randomX = Math.floor(Math.random() * width)
+      const randomY = Math.floor(Math.random() * height);
+      const randomX = Math.floor(Math.random() * width);
 
       if (randomField[randomY][randomX] === fieldCharacter) {
         randomField[randomY][randomX] = hat;
@@ -72,7 +66,34 @@ class Field {
   play() {
     let win = false;
     let lose = false;
+  
+    // Initial user position + change 'cursor' position:
 
+    // If there IS NO user position - make random
+    if (!this.field.flat().includes(pathCharacter)) {
+      let userDone = false;
+      while(!userDone) {
+        const randomY = Math.floor(Math.random() * this.field.length);
+        const randomX = Math.floor(Math.random() * this.field[0].length);
+        if (this.field[randomY][randomX] === fieldCharacter) {
+          this.field[randomY][randomX] = pathCharacter;
+          this.posX = randomX;
+          this.posY = randomY;
+          userDone = true;
+        }
+      }
+    // If there IS user position - search it & change 'cursor' position
+    } else {
+      this.field.forEach((row, index) => {
+        const search = row.indexOf(pathCharacter);
+        if(search !== -1) {
+          this.posX = search;
+          this.posY = index;
+        }
+      })
+    }
+    
+    
     while(!win || !lose) {
       
       console.clear();
@@ -112,7 +133,16 @@ class Field {
   }
 }
 
-const myField = new Field(Field.generateField(5,5, 40));
+// Play with random field:
+
+const myField = new Field(Field.generateField(10,10, 30));
+
+// Play with your own field:
+
+// const myField = new Field([
+//   ['░', '░', 'O'],
+//   ['*', 'O', '░'],
+//   ['░', '^', '░'],
+// ]);
 
 myField.play();
-
