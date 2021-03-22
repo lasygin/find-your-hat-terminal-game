@@ -18,26 +18,26 @@ You can play with random generated field or you own:
 
 Just comment out what you don't need!
 
-Also, you can give options for random field:
+Also, you can give options for random field:\
 `const myField = new Field(Field.generateField(10,10, 30));`
 
-.generateField method takes 3 parameters:
-first - for height
-second - for width
+.generateField method takes 3 parameters:\
+first - for height\
+second - for width\
 third - for how much holes you want (in % of the whole field)
 
 ## Gameplay
 
 ![fieldType](./screenshots/field-1.png?raw=true)
 
-About the icons:
-'^' - it's a hat
-'0' - it's a hole
-'░' - it's a plain field (you can step on it)
+About the icons:\
+'^' - it's a hat\
+'0' - it's a hole\
+'░' - it's a plain field (you can step on it)\
 '*' - this is you (actually it's a path of your moves)
 
-So, you will be promted to input your next move:
-u (up) / r (right) / d (down) / l (left)
+So, you will be promted to input your next move:\
+u (up) / r (right) / d (down) / l (left)\
 Just type u/r/d/l and push enter, the field will be updated with you move
 
 ![fieldType](./screenshots/field-2.png?raw=true)
@@ -45,6 +45,8 @@ Just type u/r/d/l and push enter, the field will be updated with you move
 Go on and you can finally reach your hat!
 
 ![fieldType](./screenshots/field-3.png?raw=true)
+
+
 
 WATCH FOR THE HOLES AND BORDERS OF THE FIELD!
 
